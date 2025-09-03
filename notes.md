@@ -97,4 +97,6 @@ Handling the toggling of the checkboxes was particularly interesting.
   ))}
 </div>
 ```
-This is me modifying the file
+
+## Initial Github Repository Assignment
+This assignement has been good. I'm not sure if I'm allowed to delete all the previous notes already in this file so I kept them there. I've never really had a reason in any of my other classes to use the git pull command. I've also never seen git status tell me that I was behind origin main before. Having everything nice and organized on github I'm sure will be really nice.
