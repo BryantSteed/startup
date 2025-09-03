@@ -1,4 +1,4 @@
-# Your startup name here
+# The Epic Startup
 
 [My Notes](notes.md)
 
