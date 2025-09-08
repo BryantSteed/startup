@@ -38,10 +38,20 @@ As you can see. After the user logs in they have the option to generate a QR cod
 sequenceDiagram
     actor You
     actor Website
-    You->>Website: GET request to website home page
+    You->>Website: GET request to website home login page
     Website->>You: Return home page
     You->>Website: User authentication request
-    Website->>DB: Gets user data and validates
+    Website->>DB: SELECT for user data
+    DB->>Website: returns user data to backend
+    Website->>You: validates authentication request and redirects user to account page
+    You->>Website: Send request to create a QR code
+    Website->>DB: creates the QR code and adds it to the account in the DB
+    Website->>You: sends the QR code to the user
+    You->>Website: Request to view prevous QR codes
+    Website->>DB: SELECT for user QR codes
+    DB->>Website: Returns user QR codes for user
+    Website->>You: Gives user a nice html page that shows the user QR codes
+    Website->>You: Throughout the User's time, sends Websocket updates about other people's activity on the site
 ```
 
 ### Key features
