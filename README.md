@@ -22,7 +22,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] A concise and compelling elevator pitch
 - [x] Description of key features
 - [x] Description of how you will use each technology
-- [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
+- [x] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
 
@@ -56,7 +56,7 @@ I am going to use the required technologies in the following ways.
 - **CSS** - This will give my html pages their unique style. I'll make sure that the specific style renders well on google chrome
 - **React** - Logic for user authentication, QR string and logo uploading, and QR code display. Will call service endpoints.
 - **Service** - Gets the webpage icon from a 3rd party. Basic credential assembly and user authentication. Endpoint for getting a QR code given a string and/or an image. Endpoint for getting all stored QR codes for a given account
-- **DB/Login** - Stores user authentication information and user QR codes
+- **DB/Login** - Stores user authentication information and user QR codes. Accessed by the backend.
 - **WebSocket** - Will push a notification message to all users when a user succesfully generates a QR code in real time
 
 ## 🚀 AWS deliverable
