@@ -38,7 +38,10 @@ As you can see. After the user logs in they have the option to generate a QR cod
 sequenceDiagram
     actor You
     actor Website
-    You->>Website: Replace this with your design
+    You->>Website: GET request to website home page
+    Website->>You: Return home page
+    You->>Website: User authentication request
+    Website->>DB: Gets user data and validates
 ```
 
 ### Key features
