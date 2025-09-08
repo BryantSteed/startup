@@ -30,9 +30,9 @@ Have you ever wanted to generate a QR code with your own personal logo in the mi
 
 ### Design
 
-![Design image](placeholder.png)
+![Design image](designsketch.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+As you can see. After the user logs in they have the option to generate a QR code by inserting a string and uploading an image file. There's also the option for them to logout and look at their history of past generate QR codes. On the bottom right a websocket connection will give the user a live feed of other users after they generate QR codes.
 
 ```mermaid
 sequenceDiagram
@@ -46,6 +46,7 @@ sequenceDiagram
 - Ability to generate a QR code
 - Ability to have that QR code with your logo
 - Saves past QR codes that you have made on your account
+- Lets you see other people generating QR codes on the site
 
 ### Technologies
 
