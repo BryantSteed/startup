@@ -1,0 +1,1 @@
+ssh -i ~/.ssh/epickey.pem ubuntu@50.19.56.57
