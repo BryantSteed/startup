@@ -82,12 +82,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **HTML pages** - I made an index.html page for user authentication, which brings them to the qr code generation page, which also has a placeholder for the websocket connection. Then, from there they can view their personal page that has all their saved QR codes from the database.
-- [x] **Proper HTML element usage** - Every page has a Head, Body, and Footer.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
+- [x] **HTML pages** - I made an index.html page for user authentication, which brings them to the qr code generation page, which also has a placeholder for the websocket connection. Then, from there they can view their personal page that has all their saved QR codes from the database.
+- [x] **Proper HTML element usage** - Every page has a Nav (except the login obviously), Head, Header, Body, Main and Footer.
+- [x] **Links** - The login button takes you to the qr generation page, and that page has hyperlinks to logout and to the personal page. The personal page has a link to logout and to go back to the qr generation page.
+- [x] **Text** - I have text on each page that explains what the user must do such as login and input a string and image to generate a QR code.
 - [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [x] **Images** - I did not complete this part of the deliverable.
+- [x] **Images** - I have placeholder images that will display the qr code that you just generated. I also have a place holder on the personal page that will display all the qr codes that we have in the database.
 - [x] **Login placeholder** - I did not complete this part of the deliverable.
 - [x] **DB data placeholder** - I did not complete this part of the deliverable.
 - [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
