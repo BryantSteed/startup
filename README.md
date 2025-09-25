@@ -88,7 +88,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **Text** - I have text on each page that explains what the user must do such as login and input a string and image to generate a QR code.
 - [x] **3rd party API placeholder** - On the login screen I have a little side place where the Chuck Norris API will be called to give users a joke.
 - [x] **Images** - I have placeholder images that will display the qr code that you just generated. I also have a place holder on the personal page that will display all the qr codes that we have in the database.
-- [x] **Login placeholder** - This is in my index.html. If you click the login button, it will take you to the next page.
+- [x] **Login placeholder** - This is in my index.html. If you click the login button, it will take you to the next page. This also includes a username display
 - [x] **DB data placeholder** - This appears on the personal page. I have a picture placeholder where it will display all the QR codes that a particular user has generated.
 - [x] **WebSocket placeholder** - I have a div box that has this placeholder on every page. I'm not sure if it'll stay there when I actually implement it but its a good place for it to be for now.
 
