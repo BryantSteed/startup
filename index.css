@@ -8,11 +8,12 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    flex: 1;
+    flex: 0 20px;
 }
 
 .header-title {
     display: flex;
+    flex: 1;
     justify-content: center;
     flex-direction: row;
     background-color: lightgray;
@@ -27,7 +28,17 @@ header {
 
 main {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex: 1;
+    justify-content: center;
+}
+
+.chuck-box {
+    background-color: lightcyan;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
 }
 
 .login-form {
@@ -35,13 +46,18 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 15px;
-    margin-top: 50px;
+    flex: 1;
+    gap: 1rem;
     background-color: lightblue;
 }
 
 .notification-box {
-    
+    background-color: lightyellow;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 2px solid black;
+    flex: 1;
 }
 
 footer {
@@ -49,4 +65,5 @@ footer {
     justify-content: center;
     flex-direction: row;
     background-color: lightgray;
+    flex: 0 20px;
 }
