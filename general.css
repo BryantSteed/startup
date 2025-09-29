@@ -24,5 +24,34 @@ header {
     text-decoration: none;
     color: black;
     border: black solid 2px;
+    background-color: lightgreen;
     padding: 5px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    justify-content: center;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    background-color: lightgray;
+    flex: 0 20px;
+}
+
+@media(max-width: 900px) {
+    main {
+        flex-direction: column;
+        align-items: center;
+    }
 }
