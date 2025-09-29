@@ -2,40 +2,39 @@
     
     <head>
         <title>The epic QR code generator Startup</title>
+        <link rel="stylesheet" href="index.css">
     </head>
 
     <body>
 
         <header>
-            <h1 style="text-align: center;">
-            The epic QR code generator Startup
-            </h1>
-            <nav>
+            <div class = "header-title">
+                <h1>
+                The epic QR code generator Startup
+                </h1>
+            </div>
+            <nav class = "nav-bar">
                 <a href="https://github.com/BryantSteed/startup">GitHub Repository</a>
             </nav>
 
         </header>
 
         <main>
-            <form action = "/qr_gen.html" style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
-                <label>LOGIN HERE</label>
-                <input type="text" placeholder="Username">
-                <input type="password" placeholder="Password">
+            <form class="login-form" action="/qr_gen.html">
+                <label>Login Here</label>
+                <input type="text" name="username" placeholder="Username">
+                <input type="password" name="password" placeholder="Password">
                 <button type="submit">Login</button>
             </form>
-            <br><br><br><br><br><br>
+
             <p>Chuck Norris joke of the Day[3rd Party API call]</p>
 
             <div style="color: red; text-align: center; border: 2px solid black; margin: 20px 0 20px auto;">
                 <p>Placeholder for WebSocket connection updates on User's generating their QR codes</p>
             </div>
-
-
-            <br><br><br><br><br><br><br><br><br><br><br>
         </main>
 
-        <footer style="text-align: center;">
-            <hr>
+        <footer>
             <p>&copy; 2024 QR Code Generator. All rights reserved.</p>
         </footer>
 
