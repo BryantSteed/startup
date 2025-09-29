@@ -40,6 +40,10 @@ main {
     background-color: lightblue;
 }
 
+.notification-box {
+    
+}
+
 footer {
     display: flex;
     justify-content: center;
