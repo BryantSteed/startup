@@ -5,6 +5,21 @@
     justify-content: center;
     align-items: center;
     gap: 1rem;
+    background-color: aliceblue;
+}
+
+.text-input {
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 80%;
+    height: 3rem;
+}
+
+.file-input {
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 80%;
+    height: 3rem;
 }
 
 .qr-preview {
@@ -17,6 +32,17 @@
 
 @media (max-width: 900px) {
     .qr-input {
-        flex: 0 20px;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .qr-preview {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .notification-box {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
     }
 }

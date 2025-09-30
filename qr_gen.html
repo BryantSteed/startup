@@ -12,23 +12,21 @@
         <header class="header">
             <h1 class="header-title">Your Tab for QR generation!</h1>
             <nav class="nav-bar">
-                <a class="nav-link" href="index.html">Logout [username]</a>
-                <a class="nav-link" href="personal.html">View Personal Page</a>
+                <a class="nav-link" href="index.html">Logout</a>
+                <a href="personal.html" class="nav-link">View Personal Page</a>
             </nav>
         </header>
 
         <main>
             <form class="qr-input">
-                <input type = "text" placeholder = "Enter your text here">
-                <input type = "image" value = "Click to upload QR code image">
-                <input type = submit value = "Generate QR code">
+                <input type = "text" class="text-input" placeholder = "Enter your text here">
+                <input type = "file" class="file-input" accept="image/*">
+                <input type = "submit" value = "Generate QR code">
             </form>
 
-            <div class = "qr-preview">
-                <img alt = "YOU'RE QR PREVIEW TO APPEAR HERE" style = "display: block; margin: 0 auto;" src="placeholder.png">
-            </div>
-
-            <div class="notification-box">
+            <img alt = "YOU'RE QR PREVIEW TO APPEAR HERE" src="placeholder.png">
+            
+            <div class = "notification-box">
                 <p>Placeholder for WebSocket connection updates on User's generating their QR codes</p>
             </div>
         </main>
