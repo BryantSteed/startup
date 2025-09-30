@@ -18,19 +18,22 @@
         </header>
 
         <main>
-            <form style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
+            <form class="qr-input">
                 <input type = "text" placeholder = "Enter your text here">
                 <input type = "image" value = "Click to upload QR code image">
                 <input type = submit value = "Generate QR code">
             </form>
-            <br><br><br><br><br><br><br><br>
-            <img alt = "YOU'RE QR PREVIEW TO APPEAR HERE" style = "display: block; margin: 0 auto;" src="placeholder.png">
-            <div style="color: red; text-align: center; border: 2px solid black; margin: 20px 0 20px auto;">
+
+            <div class = "qr-preview">
+                <img alt = "YOU'RE QR PREVIEW TO APPEAR HERE" style = "display: block; margin: 0 auto;" src="placeholder.png">
+            </div>
+
+            <div class="notification-box">
                 <p>Placeholder for WebSocket connection updates on User's generating their QR codes</p>
             </div>
         </main>
 
-        <footer style="text-align: center;">
+        <footer>
             <p>&copy; 2025 QR Code Generator. All rights reserved.</p>
         </footer>
 

@@ -1,0 +1,22 @@
+.qr-input {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.qr-preview {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 900px) {
+    .qr-input {
+        flex: 0 20px;
+    }
+}

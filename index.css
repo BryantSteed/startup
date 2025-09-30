@@ -94,12 +94,3 @@
     color: var(--color-muted);
     margin-top: -.25rem;
 }
-
-.notification-box {
-    background-color: lightyellow;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    border: 2px solid black;
-    flex: 1;
-}
