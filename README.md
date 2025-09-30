@@ -96,12 +96,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Header, footer, and main content body** - I did not complete this part of the deliverable.
-- [ ] **Navigation elements** - I did not complete this part of the deliverable.
-- [ ] **Responsive to window resizing** - I did not complete this part of the deliverable.
-- [ ] **Application elements** - I did not complete this part of the deliverable.
-- [ ] **Application text content** - I did not complete this part of the deliverable.
-- [ ] **Application images** - I did not complete this part of the deliverable.
+- [x] **Header, footer, and main content body** - I have a really good flex styling positioning system for each of these. Within these different flex containters, I also have other subdivisins of flex containers that help with positioning and provide general background colors and stylig.
+- [x] **Navigation elements** - My header has a nav-bar class that puts link elements onto the nav-bar. They also react to you hovering over them. Each page has this nav bar. Note that the login button is how you traverse to the next page.
+- [x] **Responsive to window resizing** - I used media elements in the CSS to detect the width of the window. it changes a few things to make it respond. The main thing is that it changes the main content styling to be a flex container along the column direction. This effectively collapses it down into an easily readable format when you shrink the window.
+- [x] **Application elements** - I put styling and margins on the login screen application element. For the QR generation application element, I style the upload file button to glow when you hover over it. I also added labels to it and style the labels with a fancy font. I made the button and text window bigger so you'd be able to click on it easier. On the personal page, I put a nice subdivision between the QR display application element and the Websocket Application Element (which is still just a placeholder for now).
+- [x] **Application text content** - My Application doesn't require a lot of text, but I did style the text that it did need. I gave the title a facny font. I had the nav links be in the arial font. I also added background colors to the nav elements and the buttons that have text on them. I made the text color black for all of them.
+- [x] **Application images** - The main thing I did here was setting max-width and max-height attributes to prevent the browser from distorting the image proportions. This worked like a charm. On the QR display I display each QR image with it's text in a div element. The qr-gallery then contains all those qr codes with their respective text that each one takes. I also made sure to specify the alt for each image.
 
 ## 🚀 React part 1: Routing deliverable
 
