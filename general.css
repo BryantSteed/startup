@@ -28,6 +28,10 @@ header {
     padding: 5px;
 }
 
+.nav-link:hover {
+    background-color: limegreen;
+}
+
 body {
     display: flex;
     flex-direction: column;
