@@ -2,34 +2,81 @@
 
     <head>
         <title>Your Personal QR Codes</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="general.css">
+        <link rel="stylesheet" href="personal.css">
     </head>
 
     <body>
 
         <header>
-            <h1 style = "text-align: center;">Your Personal QR Codes</h1>
-            <nav>
-                <a href = "index.html">Logout [username]</a>
-                <a href= "qr_gen.html">Back to QR Generation Page</a>
+            <h1 class="header-title">Your Personal QR Codes</h1>
+            <nav class="nav-bar">
+                <a href = "index.html" class="nav-link">Logout [username]</a>
+                <a href= "qr_gen.html" class="nav-link">Back to QR Generation Page</a>
             </nav>
         </header>
 
         <main>
-            <p style="text-align: center;">Here you can view and manage your generated QR codes Stored in The Database</p>
-            <br><br><br><br><br><br>
-            <img src="placeholder.png" alt = "Your QR code will appear here" style = "display: block; margin: 0 auto;">
 
-            <div style="color: red; text-align: center; border: 2px solid black; margin: 20px 0 20px auto;">
+            <div class = "qr-gallery">
+                <div class = "qr-item">
+                    <img src="placeholder.png" alt = "Your QR codes will appear here">
+                    <p>www.example.com</p>
+                </div>
+                <div class = "qr-item">
+                    <img src="placeholder.png" alt = "Your QR codes will appear here">
+                    <p>www.example.com</p>
+                </div>
+                <div class = "qr-item">
+                    <img src="placeholder.png" alt = "Your QR codes will appear here">
+                    <p>www.example.com</p>
+                </div>
+                <div class = "qr-item">
+                    <img src="placeholder.png" alt = "Your QR codes will appear here">
+                    <p>www.example.com</p>
+                </div>
+                <div class = "qr-item">
+                    <img src="placeholder.png" alt = "Your QR codes will appear here">
+                    <p>www.example.com</p>
+                </div>
+                <div class = "qr-item">
+                    <img src="placeholder.png" alt = "Your QR codes will appear here">
+                    <p>www.example.com</p>
+                </div>
+                <div class = "qr-item">
+                    <img src="placeholder.png" alt = "Your QR codes will appear here">
+                    <p>www.example.com</p>
+                </div>
+                <div class = "qr-item">
+                    <img src="placeholder.png" alt = "Your QR codes will appear here">
+                    <p>www.example.com</p>
+                </div>
+                <div class = "qr-item">
+                    <img src="placeholder.png" alt = "Your QR codes will appear here">
+                    <p>www.example.com</p>
+                </div>
+                <div class = "qr-item">
+                    <img src="placeholder.png" alt = "Your QR codes will appear here">
+                    <p>www.example.com</p>
+                </div>
+                <div class = "qr-item">
+                    <img src="placeholder.png" alt = "Your QR codes will appear here">
+                    <p>www.example.com</p>
+                </div>
+                <div class = "qr-item">
+                    <img src="placeholder.png" alt = "Your QR codes will appear here">
+                    <p>www.example.com</p>
+                </div>
+            </div>
+
+            <div class = "notification-box">
                 <p>Placeholder for WebSocket connection updates on User's generating their QR codes</p>
             </div>
 
-            <br><br><br><br><br><br><br><br>
-            <br><br><br><br><br><br><br><br>
-            <br><br><br><br><br><br><br><br>
-            <hr>
         </main>
 
-        <footer style="text-align: center;">
+        <footer>
             <p>&copy; 2025 QR Code Generator. All rights reserved.</p>
         </footer>
 
