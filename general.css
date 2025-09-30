@@ -8,7 +8,7 @@ header {
 
 .header-title {
     display: flex;
-    font-family: Arial, sans-serif;
+    font-family: Georgia;
     justify-content: center;
     flex-direction: row;
     margin-bottom: 0;
@@ -26,6 +26,7 @@ header {
     border: black solid 2px;
     background-color: lightgreen;
     padding: 5px;
+    font-family: Arial;
 }
 
 .nav-link:hover {
@@ -45,8 +46,6 @@ main {
     justify-content: center;
 }
 
-
-
 .notification-box {
     background-color: lightyellow;
     display: flex;
@@ -62,6 +61,7 @@ footer {
     flex-direction: row;
     background-color: lightgray;
     flex: 0 20px;
+    font-family: Arial;
 }
 
 @media(max-width: 900px) {
