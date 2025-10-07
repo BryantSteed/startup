@@ -1,7 +1,15 @@
 import React from 'react';
 import './login.css';
+import { useNavigate } from 'react-router-dom'
 
 export default function Login() {
+
+    const navigate = useNavigate();
+    function handleSubmit(event) {
+        event.preventDefault();
+        navigate("/qr_gen");
+    }
+
     return (
         <main>
 
@@ -9,7 +17,7 @@ export default function Login() {
                 <p>Chuck Norris joke of the Day[3rd Party API call]</p>
             </div>
 
-            <form className="login-form" action="/qr_gen.html">
+            <form className="login-form" onSubmit={handleSubmit} noValidate>
                 <label>Login Here</label>
                 <input type="text" name="username" placeholder="Username"/>
                 <input type="password" name="password" placeholder="Password"/>

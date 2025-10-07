@@ -17,14 +17,14 @@ function NotFound() {
 
 function NotFoundName() {
     return (
-        <h1 class="header-title">404 - Page Not Found</h1>
+        <h1 className="header-title">404 - Page Not Found</h1>
     );
 }
 
 function NotFoundNav() {
     return (
-        <nav class="nav-bar">
-            <a href = "index.html" class="nav-link">Back To Home</a>
+        <nav className="nav-bar">
+            <a href = "index.html" className="nav-link">Back To Home</a>
         </nav>
     );
 }
