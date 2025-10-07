@@ -41,7 +41,7 @@ export function LoginName() {
 export function LoginNav() {
     return (
         <nav className = "nav-bar">
-            <a className = "nav-link" href="https://github.com/BryantSteed/startup">GitHub Repository</a>
+            <a className = "nav-link" href="https://github.com/BryantSteed/startup">Bryant Steed GitHub Repository</a>
         </nav>
     );
 }

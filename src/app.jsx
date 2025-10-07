@@ -24,7 +24,7 @@ function NotFoundName() {
 function NotFoundNav() {
     return (
         <nav className="nav-bar">
-            <a href = "index.html" className="nav-link">Back To Home</a>
+            <NavLink to="/" className="nav-link">Back To Home</NavLink>
         </nav>
     );
 }
