@@ -67,3 +67,16 @@ export default function Personal() {
         </main>
     );
 }
+
+export function PersonalName() {
+   return (
+    <h1 class="header-title">Your Personal QR Codes</h1>
+   );
+}
+
+export function PersonalNav() {
+    return (<nav class="nav-bar">
+                <a href = "index.html" class="nav-link">Logout [username]</a>
+                <a href= "qr_gen.html" class="nav-link">Back to QR Generation Page</a>
+            </nav>);
+}
