@@ -107,9 +107,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
-- [ ] **Components** - I did not complete this part of the deliverable.
-- [ ] **Router** - I did not complete this part of the deliverable.
+- [x] **Bundled using Vite** - I have downloaded the vite package manager and I made my directory structure work according to how it should. I have my index.html and index.jsx in the root folder and then the other important files in the src folder with the static files in the public folder.
+- [x] **Components** - I have components for the login, qr_gen, and personal pages that are inserted based on the routing. I also have a function that works on the action of the login submit to navigate you to the qr_gen page. All these different pages have different nav bars, so I also made separate components for the nav bars that appear based on the routing url.
+- [x] **Router** - I used the BrowserRouter to control which components appear at certain times. The main part of my application is routed to using these routers and nav links. I also made the login submit button navigate when clicked. I have a not found page that also routes. With all this, The structure of the pages remains the same and only unnecessary elements are replaced. part of the header is replaced so you can get a new title and a new nav bar, but the structure and the footer remains constant.
 
 ## 🚀 React part 2: Reactivity deliverable
 
