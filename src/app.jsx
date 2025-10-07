@@ -4,7 +4,7 @@ import './app.css';
 
 import Login, { LoginName, LoginNav } from './login/login.jsx'
 
-import QRGen from './qr_gen/qr_gen.jsx';
+import QRGen, {QRGenName, QRNav} from './qr_gen/qr_gen.jsx';
 import Personal from './personal/personal.jsx';
 
 function NotFound() { 
@@ -19,10 +19,12 @@ export default function App() {
             <div className = "header-title">
                 <Routes>
                     <Route path="/" element={<LoginName />} />
+                    <Route path="/qr_gen" element={<QRGenName />} />
                 </Routes>
             </div>
             <Routes>
                 <Route path="/" element={<LoginNav />} />
+                <Route path="/qr_gen" element={<QRNav />} />
             </Routes>
 
             </header>

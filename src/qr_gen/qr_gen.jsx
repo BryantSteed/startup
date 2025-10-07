@@ -21,3 +21,18 @@ export default function QRGen() {
         </main>
     );
 }
+
+export function QRNav() {
+    return (
+        <nav class="nav-bar">
+                <a class="nav-link" href="index.html">Logout</a>
+                <a href="personal.html" class="nav-link">View Personal Page</a>
+        </nav>
+    );
+}
+
+export function QRGenName() {
+    return (
+        <h1 class="header-title">Your Tab for QR generation!</h1>
+    );
+}
