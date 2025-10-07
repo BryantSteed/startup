@@ -1,21 +1,22 @@
 import React from 'react';
 import './qr_gen.css';
+import { NavLink } from 'react-router-dom';
 
 export default function QRGen() {
     return (
         <main>
-            <form class="qr-input">
-                <input class="text-input" type = "text" placeholder = "Enter your text here"/>
-                <label class="file-input-label" for="image-input">Upload an image:</label>
-                <input class="file-input" id="image-input" type = "file" accept="image/*"/>
-                <input class="submit-button" type = "submit" value = "Generate QR code"/>
+            <form className="qr-input">
+                <input className="text-input" type = "text" placeholder = "Enter your text here"/>
+                <label className="file-input-label" htmlFor="image-input">Upload an image:</label>
+                <input className="file-input" id="image-input" type = "file" accept="image/*"/>
+                <input className="submit-button" type = "submit" value = "Generate QR code"/>
             </form>
 
-            <div class="qr-preview">
+            <div className="qr-preview">
                 <img alt="YOU'RE QR PREVIEW TO APPEAR HERE" src="placeholder.png"/>
             </div>
 
-            <div class = "notification-box">
+            <div className = "notification-box">
                 <p>Placeholder for WebSocket connection updates on User's generating their QR codes</p>
             </div>
         </main>
@@ -24,15 +25,15 @@ export default function QRGen() {
 
 export function QRNav() {
     return (
-        <nav class="nav-bar">
-                <a class="nav-link" href="index.html">Logout</a>
-                <a href="personal.html" class="nav-link">View Personal Page</a>
+        <nav className="nav-bar">
+                <NavLink className="nav-link" to="/">Logout</NavLink>
+                <NavLink className="nav-link" to="/personal">View Personal Page</NavLink>
         </nav>
     );
 }
 
 export function QRGenName() {
     return (
-        <h1 class="header-title">Your Tab for QR generation!</h1>
+        <h1 className="header-title">Your Tab for QR generation!</h1>
     );
 }
