@@ -1,48 +1,17 @@
 <html>
-    
+
     <head>
-        <title>The Epic QR Code Generator</title>
+        <link rel="icon" href="favicon.ico">
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="index.css">
-        <link rel="stylesheet" href="general.css">
+        <meta name="theme-color" content="#000000">
+        <title>The Epic QR Code Generator</title>
     </head>
 
     <body>
-
-        <header>
-            <div class = "header-title">
-                <h1>
-                The Epic QR Code Generator
-                </h1>
-            </div>
-            <nav class = "nav-bar">
-                <a class = "nav-link" href="https://github.com/BryantSteed/startup">GitHub Repository</a>
-            </nav>
-
-        </header>
-
-        <main>
-
-            <div class = "chuck-box">
-                <p>Chuck Norris joke of the Day[3rd Party API call]</p>
-            </div>
-
-            <form class="login-form" action="/qr_gen.html">
-                <label>Login Here</label>
-                <input type="text" name="username" placeholder="Username">
-                <input type="password" name="password" placeholder="Password">
-                <button type="submit">Login</button>
-            </form>
-
-            <div class = "notification-box">
-                <p>Placeholder for WebSocket connection updates on User's generating their QR codes</p>
-            </div>
-        </main>
-
-        <footer>
-            <p>&copy; 2025 QR Code Generator. All rights reserved.</p>
-        </footer>
-
+        <noscript>You need to enable JavaScript to run this app.</noscript>
+        <div id="root"></div>
+        <script type ="module" src="index.jsx"></script>
     </body>
 
 </html>
