@@ -2,7 +2,14 @@ import React from 'react';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import './app.css';
 
-import Login from './login/login.jsx'
+import Login, { LoginName, LoginNav } from './login/login.jsx'
+
+import QRGen from './qr_gen/qr_gen.jsx';
+import Personal from './personal/personal.jsx';
+
+function NotFound() { 
+    return <h2>Page not found</h2>;
+}
 
 export default function App() {
     return (
@@ -10,19 +17,21 @@ export default function App() {
             <div className="body">
             <header>
             <div className = "header-title">
-                <h1>
-                The Epic QR Code Generator
-                </h1>
+                <Routes>
+                    <Route path="/" element={<LoginName />} />
+                </Routes>
             </div>
-            <nav className = "nav-bar">
-                <a className = "nav-link" href="https://github.com/BryantSteed/startup">GitHub Repository</a>
-            </nav>
+            <Routes>
+                <Route path="/" element={<LoginNav />} />
+            </Routes>
 
             </header>
 
             <Routes>
                 <Route path="/" element={<Login/>} />
-
+                <Route path="/qr_gen" element={<QRGen/>} />
+                <Route path="/personal" element={<Personal/>} />
+                <Route path="*" element={<NotFound />} />
             </Routes>
 
             <footer>

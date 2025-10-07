@@ -22,3 +22,18 @@ export default function Login() {
         </main>
     );
 }
+
+export function LoginName() {
+    return (
+    <h1>
+    The Epic QR Code Generator
+    </h1> );
+}
+
+export function LoginNav() {
+    return (
+        <nav className = "nav-bar">
+            <a className = "nav-link" href="https://github.com/BryantSteed/startup">GitHub Repository</a>
+        </nav>
+    );
+}
