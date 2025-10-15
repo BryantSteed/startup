@@ -30,6 +30,8 @@ function NotFoundNav() {
 }
 
 export default function App() {
+    const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+
     return (
             <BrowserRouter>
             <div className="body">
@@ -52,8 +54,9 @@ export default function App() {
             </header>
 
             <Routes>
-                <Route path="/" element={<Login/>} />
-                <Route path="/qr_gen" element={<QRGen/>} />
+                <Route path="/" element={<Login isAuthenticated={isAuthenticated} 
+                setIsAuthenticated={setIsAuthenticated} />} />
+                <Route path="/qr_gen" element={<QRGen isAuthenticated={isAuthenticated}/>}/>
                 <Route path="/personal" element={<Personal/>} />
                 <Route path="*" element={<NotFound />} />
             </Routes>

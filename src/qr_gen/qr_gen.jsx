@@ -2,8 +2,19 @@ import React from 'react';
 import './qr_gen.css';
 import { NavLink } from 'react-router-dom';
 
-export default function QRGen() {
+export default function QRGen(props) {
+    const { isAuthenticated } = props;
+    const username = localStorage.getItem('username');
+    if (!isAuthenticated) {
+        return (
+            <main>
+                <h1>{username}, If you want to access your page,
+                     You must be logged in</h1>
+            </main>
+        );
+    }
     return (
+        
         <main>
             <form className="qr-input">
                 <input className="text-input" type = "text" placeholder = "Enter your text here"/>
@@ -24,16 +35,20 @@ export default function QRGen() {
 }
 
 export function QRNav() {
+    const username = localStorage.getItem('username');
+
     return (
         <nav className="nav-bar">
-                <NavLink className="nav-link" to="/">Logout</NavLink>
-                <NavLink className="nav-link" to="/personal">View Personal Page</NavLink>
+                <NavLink className="nav-link" to="/">Logout [{username}]</NavLink>
+                <NavLink className="nav-link" to="/personal">View Personal Page [{username}]</NavLink>
         </nav>
     );
 }
 
 export function QRGenName() {
+    const username = localStorage.getItem('username');
+
     return (
-        <h1 className="header-title">Your Tab for QR generation!</h1>
+        <h1 className="header-title">{username}'s Page for QR generation!</h1>
     );
 }
