@@ -1,40 +1,71 @@
 import React from 'react';
 import './qr_gen.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink , useNavigate} from 'react-router-dom';
+import { QRCodeCanvas } from 'qrcode.react'
 
 export default function QRGen(props) {
-    const { isAuthenticated } = props;
+    const { isAuthenticated, websocketUpdate } = props;
+    const [qrText, setQrText] = React.useState("");
+    const [qrImage, setQrImage] = React.useState(null);
+
     const username = localStorage.getItem('username');
     if (!isAuthenticated) {
-        return (
-            <main>
-                <h1>{username}, If you want to access your page,
-                     You must be logged in</h1>
-            </main>
-        );
+        const navigate = useNavigate();
+        navigate("/")
     }
+
+    function handleQrFormSubmit(event) {
+        event.preventDefault();
+        const formData = new FormData(event.currentTarget);
+        const text = formData.get('text-input');
+        const imageFile = formData.get('image-input');
+        const reader = new FileReader();
+        setQrText(text);
+        reader.onload = (e) => {
+            setQrImage(e.target.result);
+            commitToStorage(text, e.target.result);
+        };
+        reader.readAsDataURL(imageFile);
+    }
+
+    function commitToStorage(text, image) {
+        // Later, this will send our data to the server
+        const existingQRcodes = localStorage.getItem("QRcodes");
+        const newQRcodes = existingQRcodes ? JSON.parse(existingQRcodes) : [];
+        newQRcodes.push({ text: text, image: image });
+        localStorage.setItem("QRcodes", JSON.stringify(newQRcodes));
+        console.log("Stored " + text + " and " + image + " to local storage");
+    }
+
     return (
         
         <main>
-            <form className="qr-input">
-                <input className="text-input" type = "text" placeholder = "Enter your text here"/>
+            <form className="qr-input" onSubmit={handleQrFormSubmit}>
+                <input className="text-input" name="text-input" type = "text" placeholder = "Enter your text here"/>
                 <label className="file-input-label" htmlFor="image-input">Upload an image:</label>
-                <input className="file-input" id="image-input" type = "file" accept="image/*"/>
+                <input className="file-input" name="image-input" type = "file" accept="image/*"/>
                 <input className="submit-button" type = "submit" value = "Generate QR code"/>
             </form>
 
             <div className="qr-preview">
-                <img alt="YOU'RE QR PREVIEW TO APPEAR HERE" src="placeholder.png"/>
+                {qrText ? <QRCodeCanvas value={qrText} size={256} 
+                imageSettings={qrImage ? {src : qrImage} : undefined}/> :
+                <img alt="YOU'RE QR PREVIEW TO APPEAR HERE" src="placeholder.png"/>}
             </div>
 
             <div className = "notification-box">
-                <p>Placeholder for WebSocket connection updates on User's generating their QR codes</p>
+                <p>{websocketUpdate}</p>
             </div>
         </main>
     );
 }
 
-export function QRNav() {
+export function QRNav(props) {
+    const { isAuthenticated } = props;
+    if (!isAuthenticated) {
+        return;
+    }
+
     const username = localStorage.getItem('username');
 
     return (
@@ -45,7 +76,14 @@ export function QRNav() {
     );
 }
 
-export function QRGenName() {
+export function QRGenName(props) {
+    const { isAuthenticated } = props;
+    if (!isAuthenticated) {
+        return (
+            <h1 className="header-title">Please Login to access QR Generation</h1>
+        )
+    }
+
     const username = localStorage.getItem('username');
 
     return (

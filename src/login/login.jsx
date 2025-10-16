@@ -6,9 +6,8 @@ export default function Login(props) {
 
 
     const [joke, setJoke] = React.useState("Still Awaiting The Chuck Norris Joke")
-    const [websocketUpdate, setWebsocketUpdate] = React.useState("Waiting to get cool Websocket updates here!");
 
-    const {isAuthenticated, setIsAuthenticated} = props;
+    const {isAuthenticated, setIsAuthenticated, websocketUpdate} = props;
 
     function fetchJoke() {
         fetch("https://api.chucknorris.io/jokes/random")
@@ -19,12 +18,6 @@ export default function Login(props) {
     }
 
     React.useEffect(fetchJoke, []);
-
-    setInterval(() => {
-        // This is just temporary until I get the real websocket thing going
-        const message = "Random User number " + Math.floor(Math.random() * 101) + " Just Generated a QR code!";
-        setWebsocketUpdate(message);
-    }, 5000)
 
     const navigate = useNavigate();
     function handleSubmit(event) {
@@ -38,6 +31,7 @@ export default function Login(props) {
 
         // This is just a placeholder until we do the service
         setIsAuthenticated(true);
+        console.log("Just authenticated this guy");
         navigate("/qr_gen");
 
     }

@@ -31,6 +31,13 @@ function NotFoundNav() {
 
 export default function App() {
     const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+    const [websocketUpdate, setWebsocketUpdate] = React.useState("Waiting to get cool Websocket updates here!");
+
+    setInterval(() => {
+        // This is just temporary until I get the real websocket thing going
+        const message = "Random User number " + Math.floor(Math.random() * 101) + " Just Generated a QR code!";
+        setWebsocketUpdate(message);
+    }, 5000)
 
     return (
             <BrowserRouter>
@@ -39,14 +46,14 @@ export default function App() {
             <div className = "header-title">
                 <Routes>
                     <Route path="/" element={<LoginName />} />
-                    <Route path="/qr_gen" element={<QRGenName />} />
+                    <Route path="/qr_gen" element={<QRGenName isAuthenticated={isAuthenticated} />} />
                     <Route path="/personal" element={<PersonalName />} />
                     <Route path="*" element={<NotFoundName />} />
                 </Routes>
             </div>
             <Routes>
                 <Route path="/" element={<LoginNav />} />
-                <Route path="/qr_gen" element={<QRNav />} />
+                <Route path="/qr_gen" element={<QRNav isAuthenticated={isAuthenticated} />} />
                 <Route path="/personal" element={<PersonalNav />} />
                 <Route path="*" element={<NotFoundNav />} />
             </Routes>
@@ -55,8 +62,9 @@ export default function App() {
 
             <Routes>
                 <Route path="/" element={<Login isAuthenticated={isAuthenticated} 
-                setIsAuthenticated={setIsAuthenticated} />} />
-                <Route path="/qr_gen" element={<QRGen isAuthenticated={isAuthenticated}/>}/>
+                setIsAuthenticated={setIsAuthenticated} websocketUpdate={websocketUpdate}/>} />
+
+                <Route path="/qr_gen" element={<QRGen isAuthenticated={isAuthenticated} websocketUpdate={websocketUpdate}/>} />
                 <Route path="/personal" element={<Personal/>} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
