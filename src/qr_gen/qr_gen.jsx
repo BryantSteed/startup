@@ -7,12 +7,16 @@ export default function QRGen(props) {
     const { isAuthenticated, websocketUpdate } = props;
     const [qrText, setQrText] = React.useState("");
     const [qrImage, setQrImage] = React.useState(null);
+    const navigate = useNavigate();
 
     const username = localStorage.getItem('username');
-    if (!isAuthenticated) {
-        const navigate = useNavigate();
-        navigate("/")
-    }
+    
+
+    React.useEffect(() => {
+        if (!isAuthenticated) {
+            navigate("/")
+        }
+    }, []);
 
     function handleQrFormSubmit(event) {
         event.preventDefault();
@@ -60,14 +64,8 @@ export default function QRGen(props) {
     );
 }
 
-export function QRNav(props) {
-    const { isAuthenticated } = props;
-    if (!isAuthenticated) {
-        return;
-    }
-
+export function QRNav() {
     const username = localStorage.getItem('username');
-
     return (
         <nav className="nav-bar">
                 <NavLink className="nav-link" to="/">Logout [{username}]</NavLink>
@@ -76,14 +74,7 @@ export function QRNav(props) {
     );
 }
 
-export function QRGenName(props) {
-    const { isAuthenticated } = props;
-    if (!isAuthenticated) {
-        return (
-            <h1 className="header-title">Please Login to access QR Generation</h1>
-        )
-    }
-
+export function QRGenName() {
     const username = localStorage.getItem('username');
 
     return (

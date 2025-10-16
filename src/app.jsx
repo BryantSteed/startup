@@ -46,15 +46,15 @@ export default function App() {
             <div className = "header-title">
                 <Routes>
                     <Route path="/" element={<LoginName />} />
-                    <Route path="/qr_gen" element={<QRGenName isAuthenticated={isAuthenticated} />} />
-                    <Route path="/personal" element={<PersonalName />} />
+                    <Route path="/qr_gen" element={<QRGenName/>} />
+                    <Route path="/personal" element={<PersonalName/>} />
                     <Route path="*" element={<NotFoundName />} />
                 </Routes>
             </div>
             <Routes>
                 <Route path="/" element={<LoginNav />} />
-                <Route path="/qr_gen" element={<QRNav isAuthenticated={isAuthenticated} />} />
-                <Route path="/personal" element={<PersonalNav />} />
+                <Route path="/qr_gen" element={<QRNav/>} />
+                <Route path="/personal" element={<PersonalNav/>} />
                 <Route path="*" element={<NotFoundNav />} />
             </Routes>
 
@@ -65,7 +65,7 @@ export default function App() {
                 setIsAuthenticated={setIsAuthenticated} websocketUpdate={websocketUpdate}/>} />
 
                 <Route path="/qr_gen" element={<QRGen isAuthenticated={isAuthenticated} websocketUpdate={websocketUpdate}/>} />
-                <Route path="/personal" element={<Personal/>} />
+                <Route path="/personal" element={<Personal isAuthenticated={isAuthenticated} websocketUpdate={websocketUpdate}/>} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
 

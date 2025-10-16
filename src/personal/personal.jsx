@@ -1,8 +1,17 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate} from 'react-router-dom';
 import './personal.css'
 
-export default function Personal() {
+export default function Personal(props) {
+    const { isAuthenticated, websocketUpdate } = props;
+    const navigate = useNavigate();
+    
+    React.useEffect(() => {
+        if (!isAuthenticated) {
+            navigate("/")
+        }
+    }, []);
+
     return (
         <main>
 
@@ -11,58 +20,10 @@ export default function Personal() {
                     <img src="placeholder.png" alt = "Your QR codes will appear here"/>
                     <p>www.example.com</p>
                 </div>
-                <div className = "qr-item">
-                    <img src="placeholder.png" alt = "Your QR codes will appear here"/>
-                    <p>www.example.com</p>
-                </div>
-                <div className = "qr-item">
-                    <img src="placeholder.png" alt = "Your QR codes will appear here"/>
-                    <p>www.example.com</p>
-                </div>
-                <div className = "qr-item">
-                    <img src="placeholder.png" alt = "Your QR codes will appear here"/>
-                    <p>www.example.com</p>
-                </div>
-                <div className = "qr-item">
-                    <img src="placeholder.png" alt = "Your QR codes will appear here"/>
-                    <p>www.example.com</p>
-                </div>
-                <div className = "qr-item">
-                    <img src="placeholder.png" alt = "Your QR codes will appear here"/>
-                    <p>www.example.com</p>
-                </div>
-                <div className = "qr-item">
-                    <img src="placeholder.png" alt = "Your QR codes will appear here"/>
-                    <p>www.example.com</p>
-                </div>
-                <div className = "qr-item">
-                    <img src="placeholder.png" alt = "Your QR codes will appear here"/>
-                    <p>www.example.com</p>
-                </div>
-                <div className = "qr-item">
-                    <img src="placeholder.png" alt = "Your QR codes will appear here"/>
-                    <p>www.example.com</p>
-                </div>
-                <div className = "qr-item">
-                    <img src="placeholder.png" alt = "Your QR codes will appear here"/>
-                    <p>www.example.com</p>
-                </div>
-                <div className = "qr-item">
-                    <img src="placeholder.png" alt = "Your QR codes will appear here"/>
-                    <p>www.example.com</p>
-                </div>
-                <div className = "qr-item">
-                    <img src="placeholder.png" alt = "Your QR codes will appear here"/>
-                    <p>www.example.com</p>
-                </div>
-                <div className = "qr-item">
-                    <img src="placeholder.png" alt = "Your QR codes will appear here"/>
-                    <p>www.example.com</p>
-                </div>
             </div>
 
             <div className = "notification-box">
-                <p>Placeholder for WebSocket connection updates on User's generating their QR codes</p>
+                <p>{websocketUpdate}</p>
             </div>
 
         </main>
