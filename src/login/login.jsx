@@ -10,11 +10,12 @@ export default function Login(props) {
     const {isAuthenticated, setIsAuthenticated, websocketUpdate} = props;
 
     function fetchJoke() {
-        fetch("https://api.chucknorris.io/jokes/random")
+        fetch("https://icanhazdadjoke.com", 
+            {headers: {"Accept": "application/json"}})
         .then((response) => response.json())
         .then((data) => {
-        console.log(data.value);
-        setJoke(data.value);});
+        console.log(data.joke);
+        setJoke(data.joke);});
     }
 
     React.useEffect(fetchJoke, []);
