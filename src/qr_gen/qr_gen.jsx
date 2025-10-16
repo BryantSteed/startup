@@ -64,11 +64,12 @@ export default function QRGen(props) {
     );
 }
 
-export function QRNav() {
+export function QRNav(props) {
+    const { setIsAuthenticated } = props;
     const username = localStorage.getItem('username');
     return (
         <nav className="nav-bar">
-                <NavLink className="nav-link" to="/">Logout [{username}]</NavLink>
+                <NavLink className="nav-link" to="/" onClick={() => logout({setIsAuthenticated})}>Logout [{username}]</NavLink>
                 <NavLink className="nav-link" to="/personal">View Personal Page [{username}]</NavLink>
         </nav>
     );

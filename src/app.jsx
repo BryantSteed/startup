@@ -53,8 +53,8 @@ export default function App() {
             </div>
             <Routes>
                 <Route path="/" element={<LoginNav />} />
-                <Route path="/qr_gen" element={<QRNav/>} />
-                <Route path="/personal" element={<PersonalNav/>} />
+                <Route path="/qr_gen" element={<QRNav setIsAuthenticated={setIsAuthenticated}/>} />
+                <Route path="/personal" element={<PersonalNav setIsAuthenticated={setIsAuthenticated}/>} />
                 <Route path="*" element={<NotFoundNav />} />
             </Routes>
 
