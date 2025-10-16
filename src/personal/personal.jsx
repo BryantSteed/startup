@@ -13,7 +13,18 @@ export default function Personal(props) {
         }
     }, []);
 
-    function fetchStoredQRCodes() {
+    return (
+        <main>
+
+            <QRCodeGallery />
+
+            <WebSocketUpdateBox websocketUpdate={websocketUpdate} />
+
+        </main>
+    );
+}
+
+function fetchStoredQRCodes() {
         const existingQRcodes = localStorage.getItem("QRcodes");
         if (existingQRcodes) {
             return JSON.parse(existingQRcodes);
@@ -22,7 +33,7 @@ export default function Personal(props) {
         }
     }
 
-    function QRCodeList() {
+function QRCodeList() {
         const qrCodes = fetchStoredQRCodes();
         if (qrCodes.length === 0) {
             return (
@@ -46,19 +57,19 @@ export default function Personal(props) {
         return qrArray;
     }
 
+function QRCodeGallery() {
     return (
-        <main>
+    <div className = "qr-gallery">
+        <QRCodeList />
+    </div>);
+}
 
-            <div className = "qr-gallery">
-                <QRCodeList />
-            </div>
-
-            <div className = "notification-box">
-                <p>{websocketUpdate}</p>
-            </div>
-
-        </main>
-    );
+function WebSocketUpdateBox(props) {
+    const { websocketUpdate } = props;
+    return (
+    <div className = "notification-box">
+        <p>{websocketUpdate}</p>
+    </div>);
 }
 
 export function PersonalName() {
