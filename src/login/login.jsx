@@ -27,14 +27,34 @@ export default function Login(props) {
         const username = data.get('username');
         const password = data.get('password');
 
-        localStorage.setItem('username', username);
-        localStorage.setItem('password', password);
+        // localStorage.setItem('username', username);
+        // localStorage.setItem('password', password);
 
-        // This is just a placeholder until we do the service
-        setIsAuthenticated(true);
-        console.log("Just authenticated this guy");
-        navigate("/qr_gen");
+        // setIsAuthenticated(true);
+        // console.log("Just authenticated this guy");
+        // navigate("/qr_gen");
 
+        fetch("/api/login", {
+            method: "POST",
+            headers: {
+                "accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({username, password})
+        })
+        .then((response) => {
+            if (response.ok) {
+                setIsAuthenticated(true);
+                console.log("Just authenticated this guy");
+                navigate("/qr_gen");
+            } else {
+                alert("Login failed. Please check your credentials.");
+            }
+        })
+        .catch((error) => {
+            console.error("Error during login:", error);
+            alert("An error occurred during login. Sorry We suck.");
+        });
     }
 
     return (
@@ -44,10 +64,10 @@ export default function Login(props) {
                 <p>{joke}</p>
             </div>
 
-            <form className="login-form" onSubmit={handleSubmit} noValidate>
-                <label>Login Here</label>
-                <input type="text" name="username" placeholder="Username"/>
-                <input type="password" name="password" placeholder="Password"/>
+            <form className="login-form" onSubmit={handleSubmit}>
+                <label>Login or Register Here</label>
+                <input type="text" name="username" placeholder="Username" required/>
+                <input type="password" name="password" placeholder="Password" required/>
                 <button type="submit">Login or Register</button>
             </form>
 
