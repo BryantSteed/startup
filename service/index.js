@@ -8,14 +8,23 @@ const uuid = require('uuid');
 const app = express();
 
 app.use(express.json());
+app.use(debugLog);
 app.use(cookieParser());
 app.use(express.static('public'));
 
-users = [];
+const users = [];
+const sessions = {};
 
-function validateUser(username, password, res){
+function debugLog(req, res, next) {
+    console.log(`Received ${req.method} request for ${req.url}`);
+    console.log(`req.body: `, req.body);
+    console.log(`headers: `, req.headers);
+    next();
+}
+
+function validateUser(user, username, password, res){
     if (bcrypt.compareSync(password, user.passwordHash)) {
-            res.send({ message: 'Login successful' });
+            openSession(username, res, true);
         } else {
             res
             .status(401)
@@ -27,9 +36,23 @@ function registerUser(username, password, res) {
     const passwordHash = bcrypt.hashSync(password, 10);
     const newUser = { username, passwordHash };
     users.push(newUser);
+    openSession(username, res, false);
+}
+
+function openSession(username, res, isRegistered) {
+    if (isRegistered) {
+        message = "Welcome back!";
+    } else {
+        message = "Registration successful!";
+    }
+    const sessionId = uuid.v4();
+    sessions[sessionId] = username;
     res
     .status(200)
-    .send({ message: 'User registered successfully' });
+    .cookie('token', sessionId, 
+        { httpOnly: true, 
+        sameSite: 'Strict' })
+    .send({ message });
 }
 
 app.post('/api/login', (req, res) => {
@@ -37,7 +60,7 @@ app.post('/api/login', (req, res) => {
     password = req.body.password;
     const user = users.find(u => u.username === username);
     if (user) {
-        validateUser(username, password, res);
+        validateUser(user, username, password, res);
     } else {
         registerUser(username, password, res);
     }
