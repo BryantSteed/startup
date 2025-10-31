@@ -35,12 +35,27 @@ export default function QRGen(props) {
 
     function commitToStorage(text, image) {
         // Later, this will send our data to the server
-        const existingQRcodes = localStorage.getItem("QRcodes");
-        const newQRcodes = existingQRcodes ? JSON.parse(existingQRcodes) : [];
-        newQRcodes.push({ text: text, image: image });
-        localStorage.setItem("QRcodes", JSON.stringify(newQRcodes));
-        console.log("Stored " + text + " and " + image + " to local storage");
-    }
+        // const existingQRcodes = localStorage.getItem("QRcodes");
+        // const newQRcodes = existingQRcodes ? JSON.parse(existingQRcodes) : [];
+        // newQRcodes.push({ text: text, image: image });
+        // localStorage.setItem("QRcodes", JSON.stringify(newQRcodes));
+        // console.log("Stored " + text + " and " + image + " to local storage");
+        fetch("/api/qr", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "accept": "application/json"
+            },
+            body: JSON.stringify({ text, image })
+        })
+        .then((response) => {
+            if (!response.ok) {
+                console.log("Server responded with error:", response.statusText);
+            }
+        })
+        .catch((error) => {
+            console.error("Error storing QR code:", error);
+        })    }
 
     return (
         
@@ -55,7 +70,7 @@ export default function QRGen(props) {
             <div className="qr-preview">
                 {qrText ? <QRCodeCanvas value={qrText} size={256} 
                 imageSettings={qrImage ? {src : qrImage} : undefined}/> :
-                <img alt="YOU'RE QR PREVIEW TO APPEAR HERE" src="placeholder.png"/>}
+                <img alt="YOUR QR PREVIEW TO APPEAR HERE" src="placeholder.png"/>}
             </div>
 
             <div className = "notification-box">

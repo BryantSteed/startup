@@ -7,13 +7,15 @@ const uuid = require('uuid');
 
 const app = express();
 
-app.use(express.json());
+app.use(express.json({ limit: '2mb' }));
+
 app.use(debugLog);
 app.use(cookieParser());
 app.use(express.static('public'));
 
 const users = [];
 const sessions = {};
+const qrCodes = {};
 
 function debugLog(req, res, next) {
     console.log(`Received ${req.method} request for ${req.url}`);
@@ -22,7 +24,7 @@ function debugLog(req, res, next) {
     next();
 }
 
-function validateUser(user, username, password, res){
+function loginUser(user, username, password, res){
     if (bcrypt.compareSync(password, user.passwordHash)) {
             openSession(username, res, true);
         } else {
@@ -56,11 +58,11 @@ function openSession(username, res, isRegistered) {
 }
 
 app.post('/api/login', (req, res) => {
-    username = req.body.username;
-    password = req.body.password;
+    const username = req.body.username;
+    const password = req.body.password;
     const user = users.find(u => u.username === username);
     if (user) {
-        validateUser(user, username, password, res);
+        loginUser(user, username, password, res);
     } else {
         registerUser(username, password, res);
     }
@@ -73,6 +75,32 @@ app.delete('/api/logout', (req, res) => {
     .status(200)
     .send({message : 'Logout successful' });
 });
+
+app.put("/api/qr", (req, res) => {
+    const sessionId = req.cookies.token;
+    const username = validateUser(sessionId, res);
+    if (!username) return;
+    const { text, image } = req.body;
+    if (!qrCodes[username]) {
+        qrCodes[username] = [{text, image}];
+    } else {
+        qrCodes[username].push({text, image});
+        res
+        .status(200)
+        .send({ message: "QR code stored successfully" });
+    }
+});
+
+function validateUser(sessionId, res) {
+    const username = sessions[sessionId];
+    if (!username) {
+        res
+        .status(401)
+        .send({ message: 'Unauthorized' });
+        return false;
+    }
+    return username;
+}
 
 app.listen(port, () => {
     console.log(`listening on port ${port}`);
