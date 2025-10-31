@@ -25,38 +25,44 @@ export default function Personal(props) {
     );
 }
 
-function fetchStoredQRCodes() {
-        const existingQRcodes = localStorage.getItem("QRcodes");
-        if (existingQRcodes) {
-            return JSON.parse(existingQRcodes);
-        } else {
-            return [];
+async function fetchStoredQRCodes(setQRCodes) {
+    const response = await fetch("/api/qr", {
+        method: "GET",
+        headers: {
+            "accept": "application/json",
+            "Content-Type": "application/json"
         }
-    }
+    })
+    const data = await response.json();
+    setQRCodes(data.qrCodes);
+}
 
 function QRCodeList() {
-        const qrCodes = fetchStoredQRCodes();
-        if (qrCodes.length === 0) {
-            return (
-                <div className = "qr-item">
-                        <img src="placeholder.png" alt = "Your QR codes will appear here"/>
-                        <p>www.example.com</p>
-                </div>
-            );
-        }
-        const qrArray = [];
-        for (const qrCode of qrCodes) {
-            qrArray.push(
-                <div className = "qr-item">
-                    {<QRCodeCanvas value={qrCode.text} size={128}
-                    imageSettings={qrCode.image ? {src : qrCode.image} : undefined}/>}
-                    <p>{qrCode.text}</p>
-                </div>
-            );
-        }
-
-        return qrArray;
+    const [qrCodes, setQRCodes] = React.useState(null);
+    React.useEffect(() => {
+        fetchStoredQRCodes(setQRCodes);
+    },[]);
+    if (!qrCodes) {
+        return (
+            <div className = "qr-item">
+                    <img src="placeholder.png" alt = "Your QR codes will appear here"/>
+                    <p>www.example.com</p>
+            </div>
+        );
     }
+    const qrArray = [];
+    for (const qrCode of qrCodes) {
+        qrArray.push(
+            <div className = "qr-item">
+                {<QRCodeCanvas value={qrCode.text} size={128}
+                imageSettings={qrCode.image ? {src : qrCode.image} : undefined}/>}
+                <p>{qrCode.text}</p>
+            </div>
+        );
+    }
+
+    return qrArray;
+}
 
 function QRCodeGallery() {
     return (

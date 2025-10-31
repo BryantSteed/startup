@@ -55,7 +55,8 @@ export default function QRGen(props) {
         })
         .catch((error) => {
             console.error("Error storing QR code:", error);
-        })    }
+        })    
+    }
 
     return (
         

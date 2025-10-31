@@ -19,7 +19,7 @@ const qrCodes = {};
 
 function debugLog(req, res, next) {
     console.log(`Received ${req.method} request for ${req.url}`);
-    console.log(`req.body: `, req.body);
+    // console.log(`req.body: `, req.body);
     console.log(`headers: `, req.headers);
     next();
 }
@@ -99,8 +99,20 @@ function validateUser(sessionId, res) {
         .send({ message: 'Unauthorized' });
         return false;
     }
+    console.log("Validated user:", username);
     return username;
 }
+
+app.get("/api/qr", (req, res) => {
+    const sessionId = req.cookies.token;
+    const username = validateUser(sessionId, res);
+    if (!username) return;
+    const userQRCodes = qrCodes[username] ? qrCodes[username] : [];
+    console.log("Returning QR codes for user:", username);
+    res
+    .status(200)
+    .send({ qrCodes: userQRCodes });
+});
 
 app.listen(port, () => {
     console.log(`listening on port ${port}`);
