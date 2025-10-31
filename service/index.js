@@ -66,6 +66,14 @@ app.post('/api/login', (req, res) => {
     }
 });
 
+app.delete('/api/logout', (req, res) => {
+    const sessionId = req.cookies.token;
+    delete sessions[sessionId];
+    res
+    .status(200)
+    .send({message : 'Logout successful' });
+});
+
 app.listen(port, () => {
     console.log(`listening on port ${port}`);
 })
