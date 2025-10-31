@@ -1,5 +1,6 @@
 import React from 'react';
 import './qr_gen.css';
+import { logout } from '../utils/logout';
 import { NavLink , useNavigate} from 'react-router-dom';
 import { QRCodeCanvas } from 'qrcode.react'
 
@@ -69,7 +70,7 @@ export function QRNav(props) {
     const username = localStorage.getItem('username');
     return (
         <nav className="nav-bar">
-                <NavLink className="nav-link" to="/" onClick={() => logout({setIsAuthenticated})}>Logout [{username}]</NavLink>
+                <NavLink className="nav-link" to="/" onClick={() => logout(setIsAuthenticated)}>Logout [{username}]</NavLink>
                 <NavLink className="nav-link" to="/personal">View Personal Page [{username}]</NavLink>
         </nav>
     );

@@ -1,3 +1,5 @@
+// ATTENTION THIS IS DEPRECATED
+
 export function logout(props) {
     localStorage.removeItem('username');
     localStorage.removeItem('password');

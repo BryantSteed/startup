@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink, useNavigate} from 'react-router-dom';
 import './personal.css'
 import { QRCodeCanvas } from 'qrcode.react'
-import { logout } from '../logout/logout.jsx';
+import { logout } from '../utils/logout';
 
 export default function Personal(props) {
     const { isAuthenticated, websocketUpdate } = props;
@@ -84,7 +84,7 @@ export function PersonalNav(props) {
     const { setIsAuthenticated } = props;
     const username = localStorage.getItem('username');
     return (<nav className="nav-bar">
-                <NavLink to="/" onClick={() => logout({setIsAuthenticated})} className="nav-link">Logout [{username}]</NavLink>
+                <NavLink to="/" onClick={() => logout(setIsAuthenticated)} className="nav-link">Logout [{username}]</NavLink>
                 <NavLink to="/qr_gen" className="nav-link">Back to {username}'s QR Generation Page</NavLink>
             </nav>);
 }

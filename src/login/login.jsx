@@ -27,13 +27,6 @@ export default function Login(props) {
         const username = data.get('username');
         const password = data.get('password');
 
-        // localStorage.setItem('username', username);
-        // localStorage.setItem('password', password);
-
-        // setIsAuthenticated(true);
-        // console.log("Just authenticated this guy");
-        // navigate("/qr_gen");
-
         fetch("/api/login", {
             method: "POST",
             headers: {
@@ -44,6 +37,7 @@ export default function Login(props) {
         })
         .then((response) => {
             if (response.ok) {
+                localStorage.setItem('username', username);
                 setIsAuthenticated(true);
                 console.log("Just authenticated this guy");
                 navigate("/qr_gen");
