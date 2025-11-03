@@ -26,6 +26,7 @@ export default function Personal(props) {
 }
 
 async function fetchStoredQRCodes(setQRCodes) {
+    console.log("Fetching stored QR codes...");
     const response = await fetch("/api/qr", {
         method: "GET",
         headers: {
@@ -34,6 +35,7 @@ async function fetchStoredQRCodes(setQRCodes) {
         }
     })
     const data = await response.json();
+    console.log("received QR codes from server")
     setQRCodes(data.qrCodes);
 }
 
@@ -45,15 +47,24 @@ function QRCodeList() {
     if (!qrCodes) {
         return (
             <div className = "qr-item">
-                    <img src="placeholder.png" alt = "Your QR codes will appear here"/>
-                    <p>www.example.com</p>
+                <img src="placeholder.png" alt = "Your QR codes will appear here"/>
+                <p>Fetching your QR codes ... Be Patient Please</p>
+            </div>
+        );
+    }
+    if (qrCodes.length === 0) {
+        return (
+            <div className = "qr-item">
+                <img src="placeholder.png" alt = "Your QR codes will appear here"/>
+                <p>No QR codes generated yet.</p>
             </div>
         );
     }
     const qrArray = [];
+    let keyCounter = 0;
     for (const qrCode of qrCodes) {
         qrArray.push(
-            <div className = "qr-item">
+            <div key={`${keyCounter++}`} className = "qr-item">
                 {<QRCodeCanvas value={qrCode.text} size={128}
                 imageSettings={qrCode.image ? {src : qrCode.image} : undefined}/>}
                 <p>{qrCode.text}</p>

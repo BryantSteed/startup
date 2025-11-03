@@ -107,6 +107,7 @@ app.get("/api/qr", (req, res) => {
     const sessionId = req.cookies.token;
     const username = validateUser(sessionId, res);
     if (!username) return;
+    console.log("finding the QR codes for user:", username);
     const userQRCodes = qrCodes[username] ? qrCodes[username] : [];
     console.log("Returning QR codes for user:", username);
     res
