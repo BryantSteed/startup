@@ -122,12 +122,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
+- [x] **Node.js/Express HTTP service** - You can see my api service in service/index.js
+- [x] **Static middleware for frontend** - I used the static function as middleware to serve up the static files.
+- [x] **Calls to third party endpoints** - You'll notice that I call the api to fetch a joke whenever you boot up the login screen.
+- [x] **Backend service endpoints** - I have several backend service endpoints. The main functionality is to PUT api/qr.e It stores your QR code in the backend. You then retrieve your previously generated QR codes by accessing the GET api/qr endpoint. These endpoints also check for authentication.
+- [x] **Frontend calls service endpoints** - My frontend calls both of the authentication endpoints through POST api/login. If your aren't already a registered user, it will register you automatically to streamline the process. My frontend also makes calls to the PUT and GET api/qr to POST your QR codes and GET them. This gives you access to your previously generated QR codes on the personal page. I'm aware that the performance of the GET api/qr endpoint is not the best. It can take up to a few seconds to retrieve your QR codes. My understanding is that this is because its passing the whole image. I'm hoping that this will get cleaned up a little better with the database, but that's how it is for now. It works, so just be patient when you see that.
+- [x] **Supports registration, login, logout, and restricted endpoint** - As mentioned previously, you access the POST api/login to both register and login. If you haven't registered, it does that automatically. If the username has, then it validates your account. For the PUT and GET api/qr, it makes sure that you have actually authenticated first by checking your token cookie. The frontend calls these endpoints too.
 
 
 ## 🚀 DB deliverable
