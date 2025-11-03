@@ -1,1 +1,1 @@
-./deployReact.sh -k ~/.ssh/epickey.pem -h 50.19.56.57 -s startup
+./deployService.sh -k ~/.ssh/epickey.pem -h 50.19.56.57 -s startup
