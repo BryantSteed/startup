@@ -10,6 +10,7 @@ export default function Personal(props) {
     
     React.useEffect(() => {
         if (!isAuthenticated) {
+            console.log("User not authenticated, redirecting to login page.");
             navigate("/")
         }
     }, []);

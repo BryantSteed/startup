@@ -29,15 +29,35 @@ function NotFoundNav() {
     );
 }
 
+async function askAuthenticationStatus(setIsAuthenticated) {
+    await fetch("/api/auth", {method: 'GET'})
+    .then(response => response.json())
+    .then(data => {
+        if (data.username) {
+            setIsAuthenticated(true);
+        } else {
+            setIsAuthenticated(false);
+        }
+        console.log("Finished checking authentication status");
+    });
+}
+
 export default function App() {
-    const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+
+    const [isAuthenticated, setIsAuthenticated] = React.useState(null);
     const [websocketUpdate, setWebsocketUpdate] = React.useState("Waiting to get cool Websocket updates here!");
+
+    React.useEffect(() => { askAuthenticationStatus(setIsAuthenticated); }, []);
 
     setInterval(() => {
         // This is just temporary until I get the real websocket thing going
         const message = "Random User number " + Math.floor(Math.random() * 101) + " Just Generated a QR code!";
         setWebsocketUpdate(message);
     }, 5000)
+
+    if (isAuthenticated === null) {
+        return (<p>Awaiting your status</p>);
+    }
 
     return (
             <BrowserRouter>

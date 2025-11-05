@@ -15,6 +15,7 @@ export default function QRGen(props) {
 
     React.useEffect(() => {
         if (!isAuthenticated) {
+            console.log("User not authenticated, redirecting to login page.");
             navigate("/")
         }
     }, []);

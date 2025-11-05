@@ -115,6 +115,24 @@ app.get("/api/qr", (req, res) => {
     .send({ qrCodes: userQRCodes });
 });
 
+app.get("/api/auth", (req, res) => {
+    const sessionId = req.cookies.token;
+    const username = validateUser(sessionId, res);
+    if (!username) return;
+    res
+    .status(200)
+    .send({ message: "User is authenticated", username: username });
+});
+
+
+app.use(function (err, req, res, next) {
+  res.status(500).send({ type: err.name, message: err.message });
+});
+
+app.use((_req, res) => {
+  res.sendFile('index.html', { root: 'public' });
+});
+
 app.listen(port, () => {
     console.log(`listening on port ${port}`);
 })
