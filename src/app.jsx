@@ -37,6 +37,7 @@ async function askAuthenticationStatus(setIsAuthenticated) {
             setIsAuthenticated(true);
         } else {
             setIsAuthenticated(false);
+            console.log("User is not authenticated");
         }
         console.log("Finished checking authentication status");
     });

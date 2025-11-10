@@ -23,20 +23,15 @@ app.use(debugLog);
 app.use(cookieParser());
 app.use(express.static('public'));
 
-const users = [];
-const sessions = {};
-const qrCodes = {};
-
 function debugLog(req, res, next) {
     console.log(`Received ${req.method} request for ${req.url}`);
-    // console.log(`req.body: `, req.body);
     console.log(`headers: `, req.headers);
     next();
 }
 
-function loginUser(user, username, password, res){
+async function loginUser(user, username, password, res){
     if (bcrypt.compareSync(password, user.passwordHash)) {
-            openSession(username, res, true);
+            await openSession(username, res, true);
         } else {
             res
             .status(401)
@@ -44,20 +39,20 @@ function loginUser(user, username, password, res){
         }
 }
 
-function registerUser(username, password, res) {
+async function registerUser(username, password, res) {
     const passwordHash = bcrypt.hashSync(password, 10);
     const newUser = { username, passwordHash };
-    addNewUser(newUser);
-    openSession(username, res, false);
+    await addNewUser(newUser);
+    await openSession(username, res, false);
 }
 
-function openSession(username, res, isRegistered) {
+async function openSession(username, res, isRegistered) {
     if (isRegistered) {
         message = "Welcome back!";
     } else {
         message = "Registration successful!";
     }
-    sessionId = createUserSession(username);
+    sessionId = await createUserSession(username);
     res
     .status(200)
     .cookie('token', sessionId, 
@@ -66,45 +61,48 @@ function openSession(username, res, isRegistered) {
     .send({ message });
 }
 
-function addNewUser(newUser) {
-    users.push(newUser);
+async function addNewUser(newUser) {
+    await usersCollection.insertOne(newUser);
 }
 
-function findUser(username) {
-    return users.find(u => u.username === username);
+async function findUser(username) {
+    return await usersCollection.findOne({ username: username });
 }
 
-function createUserSession(username) {
+async function createUserSession(username) {
     const sessionId = uuid.v4();
-    sessions[sessionId] = username;
+    await sessionsCollection.insertOne({ sessionId, username });
     return sessionId;
 }
 
-function deleteUserSession(sessionId) {
-    delete sessions[sessionId];
+async function deleteUserSession(sessionId) {
+    await sessionsCollection.deleteOne({ sessionId });
 }
 
-function getUsernameBySessionID(sessionId) {
-    return sessions[sessionId];
-}
-
-function getUserQRCodes(username) {
-    const userQRCodes = qrCodes[username] ? qrCodes[username] : [];
-    return userQRCodes;
-}
-
-function addUserQRCode(username, text, image) {
-    if (!qrCodes[username]) {
-        qrCodes[username] = [{ text, image }];
-    } else {
-        qrCodes[username].push({ text, image });
+async function getUsernameBySessionID(sessionId) {
+    query = { sessionId: sessionId };
+    const session = await sessionsCollection.findOne(query);
+    console.log("Session found:", session);
+    if (!session) {
+        console.log(`No session found for sessionId: ${sessionId}`);
+        return null;
     }
+    return session.username;
 }
 
-app.post('/api/login', (req, res) => {
+async function getUserQRCodes(username) {
+    return await qrCodesCollection.find(
+        {username}, {projection : {text: 1, image: 1, _id: 0}}).toArray();
+}
+
+async function addUserQRCode(username, text, image) {
+    await qrCodesCollection.insertOne({ username, text, image });
+}
+
+app.post('/api/login', async (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-    const user = findUser(username);
+    const user = await findUser(username);
     if (user) {
         loginUser(user, username, password, res);
     } else {
@@ -112,27 +110,28 @@ app.post('/api/login', (req, res) => {
     }
 });
 
-app.delete('/api/logout', (req, res) => {
+app.delete('/api/logout', async (req, res) => {
     const sessionId = req.cookies.token;
-    deleteUserSession(sessionId);
+    await deleteUserSession(sessionId);
     res
     .status(200)
     .send({message : 'Logout successful' });
 });
 
-app.put("/api/qr", (req, res) => {
+app.put("/api/qr", async (req, res) => {
     const sessionId = req.cookies.token;
-    const username = validateUser(sessionId, res);
+    const username = await validateUser(sessionId, res);
     if (!username) return;
     const { text, image } = req.body;
-    addUserQRCode(username, text, image);
+    await addUserQRCode(username, text, image);
     res
     .status(200)
     .send({ message: "QR code stored successfully" });
 });
 
-function validateUser(sessionId, res) {
-    const username = getUsernameBySessionID(sessionId);
+async function validateUser(sessionId, res) {
+    console.log("Validating sessionId:", sessionId);
+    const username = await getUsernameBySessionID(sessionId);
     if (!username) {
         res
         .status(401)
@@ -143,21 +142,22 @@ function validateUser(sessionId, res) {
     return username;
 }
 
-app.get("/api/qr", (req, res) => {
+app.get("/api/qr", async (req, res) => {
     const sessionId = req.cookies.token;
-    const username = validateUser(sessionId, res);
+    console.log("Received sessionId from client cookie:", sessionId);
+    const username = await validateUser(sessionId, res);
     if (!username) return;
     console.log("finding the QR codes for user:", username);
-    const userQRCodes = getUserQRCodes(username);
+    const userQRCodes = await getUserQRCodes(username);
     console.log("Returning QR codes for user:", username);
     res
     .status(200)
     .send({ qrCodes: userQRCodes });
 });
 
-app.get("/api/auth", (req, res) => {
+app.get("/api/auth", async (req, res) => {
     const sessionId = req.cookies.token;
-    const username = validateUser(sessionId, res);
+    const username = await validateUser(sessionId, res);
     if (!username) return;
     res
     .status(200)
@@ -166,11 +166,12 @@ app.get("/api/auth", (req, res) => {
 
 
 app.use(function (err, req, res, next) {
-  res.status(500).send({ type: err.name, message: err.message });
+    console.log('Error handler called:', err);
+    res.status(500).send({ type: err.name, message: err.message });
 });
 
 app.use((_req, res) => {
-  res.sendFile('index.html', { root: 'public' });
+    res.sendFile('index.html', { root: 'public' });
 });
 
 app.listen(port, () => {
