@@ -47,7 +47,7 @@ function loginUser(user, username, password, res){
 function registerUser(username, password, res) {
     const passwordHash = bcrypt.hashSync(password, 10);
     const newUser = { username, passwordHash };
-    users.push(newUser);
+    addNewUser(newUser);
     openSession(username, res, false);
 }
 
@@ -57,8 +57,7 @@ function openSession(username, res, isRegistered) {
     } else {
         message = "Registration successful!";
     }
-    const sessionId = uuid.v4();
-    sessions[sessionId] = username;
+    sessionId = createUserSession(username);
     res
     .status(200)
     .cookie('token', sessionId, 
@@ -67,10 +66,45 @@ function openSession(username, res, isRegistered) {
     .send({ message });
 }
 
+function addNewUser(newUser) {
+    users.push(newUser);
+}
+
+function findUser(username) {
+    return users.find(u => u.username === username);
+}
+
+function createUserSession(username) {
+    const sessionId = uuid.v4();
+    sessions[sessionId] = username;
+    return sessionId;
+}
+
+function deleteUserSession(sessionId) {
+    delete sessions[sessionId];
+}
+
+function getUsernameBySessionID(sessionId) {
+    return sessions[sessionId];
+}
+
+function getUserQRCodes(username) {
+    const userQRCodes = qrCodes[username] ? qrCodes[username] : [];
+    return userQRCodes;
+}
+
+function addUserQRCode(username, text, image) {
+    if (!qrCodes[username]) {
+        qrCodes[username] = [{ text, image }];
+    } else {
+        qrCodes[username].push({ text, image });
+    }
+}
+
 app.post('/api/login', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-    const user = users.find(u => u.username === username);
+    const user = findUser(username);
     if (user) {
         loginUser(user, username, password, res);
     } else {
@@ -80,7 +114,7 @@ app.post('/api/login', (req, res) => {
 
 app.delete('/api/logout', (req, res) => {
     const sessionId = req.cookies.token;
-    delete sessions[sessionId];
+    deleteUserSession(sessionId);
     res
     .status(200)
     .send({message : 'Logout successful' });
@@ -91,18 +125,14 @@ app.put("/api/qr", (req, res) => {
     const username = validateUser(sessionId, res);
     if (!username) return;
     const { text, image } = req.body;
-    if (!qrCodes[username]) {
-        qrCodes[username] = [{text, image}];
-    } else {
-        qrCodes[username].push({text, image});
-        res
-        .status(200)
-        .send({ message: "QR code stored successfully" });
-    }
+    addUserQRCode(username, text, image);
+    res
+    .status(200)
+    .send({ message: "QR code stored successfully" });
 });
 
 function validateUser(sessionId, res) {
-    const username = sessions[sessionId];
+    const username = getUsernameBySessionID(sessionId);
     if (!username) {
         res
         .status(401)
@@ -118,7 +148,7 @@ app.get("/api/qr", (req, res) => {
     const username = validateUser(sessionId, res);
     if (!username) return;
     console.log("finding the QR codes for user:", username);
-    const userQRCodes = qrCodes[username] ? qrCodes[username] : [];
+    const userQRCodes = getUserQRCodes(username);
     console.log("Returning QR codes for user:", username);
     res
     .status(200)
