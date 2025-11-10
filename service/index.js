@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
 const { MongoClient } = require('mongodb');
-const config = require('./dbConfig.json');
+const config = require('./dbconfig.json');
 
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
