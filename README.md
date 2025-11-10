@@ -134,8 +134,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Stores data in MongoDB** - I did not complete this part of the deliverable.
-- [ ] **Stores credentials in MongoDB** - I did not complete this part of the deliverable.
+- [x] **Stores data in MongoDB** - The collection I made for this is called qrCodes. Each entry contain a QR code entry. The entries contain a username, text, and an image Base64 encoded string. The sub database on Mongo is called qrCodeDB. Every time the user creates a new QR code, it will send th appropriate request to the backend. The backend will then add it to the mongo database. When a user goes to the personal page, it automatically send a request to get all the qr codes. The backend then get them from the Mongo database.
+- [x] **Stores credentials in MongoDB** - In the database, I used a users collection to store usernames and hashed passwords. The sessions collection stores each valid session: a sessionId and a username. To validate that a user is truly in a session, I check their sessionId against the one listed in the database. When opening a session, I check that their password hash matches the one stored in the database. If so (or if they're registering), I create a session Object and put it into the session collection. When they logout, I simply remove it. For the users collection, I simply add to it whenever somebody registers and query it when somebody logs in.
 
 ## 🚀 WebSocket deliverable
 
