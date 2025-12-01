@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
 const { MongoClient } = require('mongodb');
 const config = require('./dbconfig.json');
+const { socketHandler } = require('./socketHandler');
 
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
@@ -174,6 +175,8 @@ app.use((_req, res) => {
     res.sendFile('index.html', { root: 'public' });
 });
 
-app.listen(port, () => {
+const httpServer = app.listen(port, () => {
     console.log(`listening on port ${port}`);
-})
+});
+
+socketHandler(httpServer);
