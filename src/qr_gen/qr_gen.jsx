@@ -5,7 +5,7 @@ import { NavLink , useNavigate} from 'react-router-dom';
 import { QRCodeCanvas } from 'qrcode.react'
 
 export default function QRGen(props) {
-    const { isAuthenticated, websocketUpdate } = props;
+    const { isAuthenticated, websocketUpdate, socketSender } = props;
     const [qrText, setQrText] = React.useState("");
     const [qrImage, setQrImage] = React.useState(null);
     const navigate = useNavigate();
@@ -35,12 +35,6 @@ export default function QRGen(props) {
     }
 
     function commitToStorage(text, image) {
-        // Later, this will send our data to the server
-        // const existingQRcodes = localStorage.getItem("QRcodes");
-        // const newQRcodes = existingQRcodes ? JSON.parse(existingQRcodes) : [];
-        // newQRcodes.push({ text: text, image: image });
-        // localStorage.setItem("QRcodes", JSON.stringify(newQRcodes));
-        // console.log("Stored " + text + " and " + image + " to local storage");
         fetch("/api/qr", {
             method: "PUT",
             headers: {
@@ -52,11 +46,15 @@ export default function QRGen(props) {
         .then((response) => {
             if (!response.ok) {
                 console.log("Server responded with error:", response.statusText);
+            } else {
+                console.log("I am now attempting to send websocket message");
+                socketSender.send(`User ${username} generated a new QR code!`);
+                console.log("Websocket message sent successfully");
             }
         })
         .catch((error) => {
             console.error("Error storing QR code:", error);
-        })    
+        });
     }
 
     return (

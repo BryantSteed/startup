@@ -14,6 +14,7 @@ class SocketHandler {
     }
 
     sendToAllClients(message, socket) {
+        console.log(`Received message: ${message}`);
         for (const client of this.wsServer.clients) {
             client.send(message);
         }

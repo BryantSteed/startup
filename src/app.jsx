@@ -50,11 +50,20 @@ export default function App() {
 
     React.useEffect(() => { askAuthenticationStatus(setIsAuthenticated); }, []);
 
-    setInterval(() => {
-        // This is just temporary until I get the real websocket thing going
-        const message = "Random User number " + Math.floor(Math.random() * 101) + " Just Generated a QR code!";
+    // setInterval(() => {
+    //     // This is just temporary until I get the real websocket thing going
+    //     const message = "Random User number " + Math.floor(Math.random() * 101) + " Just Generated a QR code!";
+    //     setWebsocketUpdate(message);
+    // }, 5000)
+
+    const port = window.location.port;
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    const socket = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
+    socket.onmessage = async function(event){
+        const message = await event.data.text();
+        console.log("Received websocket message:", message);
         setWebsocketUpdate(message);
-    }, 5000)
+    }
 
     if (isAuthenticated === null) {
         return (<p>Awaiting your status</p>);
@@ -85,7 +94,7 @@ export default function App() {
                 <Route path="/" element={<Login isAuthenticated={isAuthenticated} 
                 setIsAuthenticated={setIsAuthenticated} websocketUpdate={websocketUpdate}/>} />
 
-                <Route path="/qr_gen" element={<QRGen isAuthenticated={isAuthenticated} websocketUpdate={websocketUpdate}/>} />
+                <Route path="/qr_gen" element={<QRGen isAuthenticated={isAuthenticated} websocketUpdate={websocketUpdate} socketSender={socket} />} />
                 <Route path="/personal" element={<Personal isAuthenticated={isAuthenticated} websocketUpdate={websocketUpdate}/>} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
