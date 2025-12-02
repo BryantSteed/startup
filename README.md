@@ -141,8 +141,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Backend listens for WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Frontend makes WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **WebSocket data displayed** - I did not complete this part of the deliverable.
-- [ ] **Application is fully functional** - I did not complete this part of the deliverable.
+- [x] **Backend listens for WebSocket connection** - I implemented this my making my own class in the socketHandler.js file in my service directory. It listens for websocket connections and is configured to immediately forward the message to all clients when it receives a message from one. Note that this includes that client that sent the data.
+- [x] **Frontend makes WebSocket connection** - I implemented this in the top level app.jsx because I pass the websocket components like websocketUpdate and socketSender into the constituent components. This is how all the other core components reflect the websocket message that gets sent to them. It updates the message and displays to the user who has recently generated a QR code on the network.
+- [x] **Data sent over WebSocket connection** - This happens in the qr_gen component page. Whenever I send a PUT to the server to store the new QR code, I check if It was successful. If it is, I send a websocket message to the server, telling it a message that I want to be broadcast to everyone. This message is that I (The user) successfully generated a QR code. This gets the other users exited to generate more QR codes. Ofc course, the server sends this websocket message to every single client for display.
+- [x] **WebSocket data displayed** - I There is a component in every main page that contains the latest large scale webSocket update. If your on any page (login, qr_gen, or personal), it will say the name of the user who most recently generated a QR code provided that your connection was open prior to that user generating one. On the desktop view, this generally appears on the far right panel. On mobile, this is usually at the bottom. Its also yellow tinted.
+- [x] **Application is fully functional** - Yes. The websocket section was the last thing the application needed in order to be complete.
