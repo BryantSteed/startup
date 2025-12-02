@@ -50,12 +50,6 @@ export default function App() {
 
     React.useEffect(() => { askAuthenticationStatus(setIsAuthenticated); }, []);
 
-    // setInterval(() => {
-    //     // This is just temporary until I get the real websocket thing going
-    //     const message = "Random User number " + Math.floor(Math.random() * 101) + " Just Generated a QR code!";
-    //     setWebsocketUpdate(message);
-    // }, 5000)
-
     const port = window.location.port;
     const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
     const socket = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
