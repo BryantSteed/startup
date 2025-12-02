@@ -1,17 +1,23 @@
-const {WebSocketServer} = require('ws');
+const { WebSocketServer } = require('ws');
 
-export function socketHandler(httpServer) {
-    const wsServer = new WebSocketServer({ server: httpServer });
-    wsServer.on('connection', handleConnection);
+class SocketHandler {
+    constructor(httpServer) {
+        this.wsServer = new WebSocketServer({ server: httpServer });
+        this.wsServer.on('connection', (socket) => this.handleConnection(socket));
+        console.log('WebSocket server is running');
+    }
 
+    handleConnection(socket) {
+        console.log('New WebSocket connection established');
+
+        socket.on('message', (message) => this.sendToAllClients(message, socket));
+    }
+
+    sendToAllClients(message, socket) {
+        for (const client of this.wsServer.clients) {
+            client.send(message);
+        }
+    }
 }
 
-function handleConnection(socket) {
-    console.log('New WebSocket connection established');
-
-    socket.on('message', (message) => {
-        console.log('Received message:', message);
-        // Echo the message back to the client
-        socket.send(`Server received: ${message}`);
-    });
-}
+module.exports = { SocketHandler };
